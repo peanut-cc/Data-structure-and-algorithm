@@ -52,8 +52,34 @@ func threeSum(nums []int) [][]int {
 	return result
 }
 
+// 重复写一遍
+func threeSum2(nums []int) [][]int {
+	maps := make(map[int]int)
+	resultMap := make(map[string]bool)
+	result := make([][]int, 0)
+	for i, v := range nums {
+		for j := 0; j < i; j++ {
+			if v, ok := maps[-v-nums[j]]; ok && v != j {
+				resultArray := []int{nums[i], nums[j], nums[v]}
+				sort.Ints(resultArray)
+				resultByte, err := json.Marshal(resultArray)
+				if err != nil {
+					panic(err)
+				}
+				resultStr := string(resultByte)
+				if _, ok := resultMap[resultStr]; !ok {
+					result = append(result, resultArray)
+					resultMap[resultStr] = true
+				}
+			}
+		}
+		maps[v] = i
+	}
+	return result
+}
+
 func main() {
 	nums := []int{-1, 0, 1, 2, -1, -4}
-	ret := threeSum(nums)
+	ret := threeSum2(nums)
 	fmt.Println(ret)
 }
