@@ -29,6 +29,8 @@ func moveZeroes(nums []int) {
 	}
 }
 
+// 方法2 的好处在于，只会在nums[i] != 0 的时候才会进行交换
+// 隔了一段时间再看这个题认识更加深刻
 func moveZeroes2(nums []int) {
 	j := 0
 	for i := 0; i < len(nums); i++ {
