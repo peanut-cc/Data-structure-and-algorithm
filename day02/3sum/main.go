@@ -78,6 +78,43 @@ func threeSum2(nums []int) [][]int {
 	return result
 }
 
+func threeSum3(nums []int) [][]int {
+	n := len(nums)
+	var res [][]int
+	if n < 3 {
+		return res
+	}
+	sort.Ints(nums)
+	for k, v := range nums {
+		if v > 0 {
+			return res
+		}
+		if k > 0 && v == nums[k-1] {
+			continue
+		}
+		L := k + 1
+		R := n - 1
+		for L < R {
+			if v+nums[L]+nums[R] == 0 {
+				res = append(res, []int{v, nums[L], nums[R]})
+				for L < R && nums[L] == nums[L+1] {
+					L = L + 1
+				}
+				for L < R && nums[R] == nums[R-1] {
+					R = R - 1
+				}
+				L = L + 1
+				R = R - 1
+			} else if v+nums[L]+nums[R] > 0 {
+				R = R - 1
+			} else {
+				L = L + 1
+			}
+		}
+	}
+	return res
+}
+
 func main() {
 	nums := []int{-1, 0, 1, 2, -1, -4}
 	ret := threeSum2(nums)
