@@ -34,7 +34,7 @@ func reverseList2(head *ListNode) *ListNode {
 	fmt.Println(head.Val)
 	return p
 }
-}
+
 
 func main() {
 	var curr *ListNode
