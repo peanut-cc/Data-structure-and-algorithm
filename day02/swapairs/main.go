@@ -1,5 +1,7 @@
 package main
 
+import "crypto/ed25519"
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -23,7 +25,40 @@ func swapPairs(head *ListNode) *ListNode {
 	return pre.Next
 }
 
+// 重复练习一遍
 func swapPairs2(head *ListNode) *ListNode {
+	pre := &ListNode{}
+	pre.Next = head
+	tmp := pre
+	for tmp.Next != nil && tmp.Next.Next != nil {
+		start := tmp.Next
+		end := tmp.Next.Next
+		tmp.Next = end
+		start.Next = end.Next
+		end.Next = start
+		tmp = start
+	}
+	return pre.Next
+}
+
+// 再次重复练习一遍
+func swapPairs3(head *ListNode) *ListNode {
+	pre := &ListNode{}
+	pre.Next = head
+	tmp := pre
+	for tmp.Next != nil && tmp.Next.Next != nil {
+		start := tmp.Next
+		end := tmp.Next.Next
+		tmp.Next = end
+		start.Next = end.Next
+		end.Next = start
+		tmp = start
+	}
+	return pre.Next
+}
+
+// 自己默写一遍，加强理解
+func swapPairs4(head *ListNode) *ListNode {
 	pre := &ListNode{}
 	pre.Next = head
 	tmp := pre
