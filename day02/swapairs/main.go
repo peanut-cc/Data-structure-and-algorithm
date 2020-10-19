@@ -116,6 +116,16 @@ func swapPairsNew(head *ListNode) *ListNode {
 	return next
 }
 
+func swapPairsNew2(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	next := head.Next
+	head.Next = swapPairsNew2(next.Next)
+	next.Next = head
+	return next
+}
+
 func main() {
 	var curr *ListNode
 	var origin *ListNode
