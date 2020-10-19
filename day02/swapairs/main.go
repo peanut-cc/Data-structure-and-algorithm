@@ -1,5 +1,6 @@
 package main
 
+import "fmt"
 
 type ListNode struct {
 	Val  int
@@ -87,7 +88,6 @@ func swapPairs5(head *ListNode) *ListNode {
 	return pre.Next
 }
 
-
 // 周一重复练习
 func swapPairs6(head *ListNode) *ListNode {
 	pre := &ListNode{}
@@ -102,4 +102,49 @@ func swapPairs6(head *ListNode) *ListNode {
 		tmp = start
 	}
 	return pre.Next
+}
+
+// 用递归的思路实现
+// 这种递归的实现其实是从后往前两两反转，需要多写写，初看代码不是非常容易理解
+func swapPairsNew(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	next := head.Next
+	head.Next = swapPairsNew(next.Next)
+	next.Next = head
+	return next
+}
+
+func main() {
+	var curr *ListNode
+	var origin *ListNode
+	for i := 1; i <= 4; i++ {
+		one := &ListNode{
+			Val: i,
+		}
+		if i == 1 {
+			origin = one
+		}
+		if curr != nil {
+			curr.Next = one
+		}
+		curr = one
+	}
+	fmt.Printf("%#v\n", origin)
+	// for origin != nil {
+	// 	fmt.Printf("%#v\n", origin.Val)
+	// 	if origin.Next == nil {
+	// 		break
+	// 	}
+	// 	origin = origin.Next
+	// }
+	res := swapPairsNew(origin)
+	for res != nil {
+		fmt.Printf("%#v\n", res.Val)
+		if res.Next == nil {
+			break
+		}
+		res = res.Next
+	}
 }
