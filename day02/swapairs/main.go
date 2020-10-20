@@ -104,6 +104,22 @@ func swapPairs6(head *ListNode) *ListNode {
 	return pre.Next
 }
 
+// 重复练习增加记忆
+func swapPairs7(head *ListNode) *ListNode {
+	pre := &ListNode{}
+	pre.Next = head
+	tmp := pre
+	for tmp.Next != nil && tmp.Next.Next != nil {
+		start := tmp.Next
+		end := tmp.Next.Next
+		tmp.Next = end
+		start.Next = end.Next
+		end.Next = start
+		tmp = start
+	}
+	return pre.Next
+}
+
 // 用递归的思路实现
 // 这种递归的实现其实是从后往前两两反转，需要多写写，初看代码不是非常容易理解
 func swapPairsNew(head *ListNode) *ListNode {
@@ -122,6 +138,17 @@ func swapPairsNew2(head *ListNode) *ListNode {
 	}
 	next := head.Next
 	head.Next = swapPairsNew2(next.Next)
+	next.Next = head
+	return next
+}
+
+// 递归思路的重复练习
+func swapParisNew3(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	next := head.Next
+	head.Next = swapParisNew3(next.Next)
 	next.Next = head
 	return next
 }
