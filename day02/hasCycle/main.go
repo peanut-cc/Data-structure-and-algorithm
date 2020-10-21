@@ -126,21 +126,6 @@ func hasCycleSlowFast4(head *ListNode) bool {
 	return true
 }
 
-func hasCycleSlowFast5(head *ListNode) bool {
-	if head == nil || head.Next == nil {
-		return false
-	}
-	slow := head
-	fast := head.Next
-	for fast != slow {
-		if fast == nil || slow == nil {
-			return false
-		}
-		slow = slow.Next
-		fast = fast.Next.Next
-	}
-	return true
-}
 
 
 

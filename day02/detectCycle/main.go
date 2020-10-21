@@ -18,3 +18,29 @@ func detectCycle(head *ListNode) *ListNode {
 	}
 	return nil
 }
+
+// 重复练习哈希表方式的实现
+func detectCycleHash(head *ListNode) *ListNode {
+	hMap := map[*ListNode]struct{}{}
+	for head != nil {
+		if _, ok := hMap[head]; ok {
+			return head
+		}
+		hMap[head] = struct{}{}
+		head = head.Next
+	}
+	return nil
+}
+
+func detectCycleFastSlow(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return nil
+	}
+	slow := head
+	fast := head.Next
+	for slow != fast  {
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+	return slow
+}
